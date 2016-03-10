@@ -9,7 +9,7 @@
 | FachriUl	    	| 1301140151    |
 
 ###### Log Changes
-v0.1. Intialization Project 
+v0.1. Intialization Project\n
 v1.0. Create Class Models 
   * With class testing implementations
 

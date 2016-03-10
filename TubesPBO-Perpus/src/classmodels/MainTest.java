@@ -3,6 +3,7 @@ package classmodels;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  *
@@ -15,7 +16,6 @@ public class MainTest {
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = null;
-        
         
         // CLASS [BUKU] TESTING CASE
         // Instantiate Object Buku
@@ -38,7 +38,7 @@ public class MainTest {
         }
         
         anggota1.createPinjaman(date, "IDP1", 5);
-        System.out.println("Status Sebelum : " + anggota1.getPinjaman(0).getStatus());
+        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
         
         try {
            date = dateFormat.parse("10-02-2016");
@@ -49,13 +49,15 @@ public class MainTest {
         
         anggota1.pengembalianPinjaman("IDP1", date);
         
-        System.out.println("Status Sebelum : " + anggota1.getPinjaman(0).getStatus());
+        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
        
         System.out.println(buku1.getSisaBuku());
         
-        anggota1.getPinjaman(0).addBuku(buku1);
+        anggota1.getPinjamanByIndex(0).addBuku(buku1);
         
         System.out.println(buku1.getSisaBuku());
+        
+        HashSet hs = new HashSet();
     }
     
 }

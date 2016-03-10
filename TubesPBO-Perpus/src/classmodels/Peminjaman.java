@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Peminjaman{
-	private ArrayList<Buku> pinjaman = new ArrayList();
+	private ArrayList<Buku> listBuku = new ArrayList();
 	private String idPeminjaman;
 	private Date tanggalPinjam;
 	private Date tanggalKembali;
@@ -18,16 +18,14 @@ public class Peminjaman{
 	private boolean statusPeminjaman = true;
 	private double denda;
 	private int maxPinjam;
-        
-        //Buat Forma Date
+        //Buat Format Date
 
-	
+        
         // CONSTRUCTOR //
-	public Peminjaman(String IdPeminjaman, Date tanggalPinjam, int maxPinjam) throws ParseException{
+	public Peminjaman(String IdPeminjaman, Date tanggalPinjam, int maxPinjam){
             this.idPeminjaman = IdPeminjaman;
             this.maxPinjam = maxPinjam;
             this.tanggalPinjam = tanggalPinjam;
-
 	}
 	
         // CLASS METHOD //
@@ -35,7 +33,7 @@ public class Peminjaman{
 //            if(getSisaPinjam() >= 0){
 //            System.out.print(b.getJudul());
             b.kurangSisaBuku();
-                pinjaman.add(b);
+                listBuku.add(b);
 //            } else {
 //                System.out.println("Peminjaman Penuh");
 //            }
@@ -44,15 +42,19 @@ public class Peminjaman{
 	
         
 	public void removeBuku(Buku b){
-            if(pinjaman.size() > 0){    
-                pinjaman.remove(b);
+            if(listBuku.size() > 0){    
+                listBuku.remove(b);
             }else{
                 System.out.println("Tidak ada buku yang dipinjam");
             }
 	}
+        
+        public Buku getBukuByIndex(int idx){
+            return listBuku.get(idx);
+	}
             
-	public Buku getBuku(String id){
-            for(Buku bk : pinjaman){
+	public Buku getBukuById(String id){
+            for(Buku bk : listBuku){
                 if(bk.getIdBuku() == id)
                     return bk;
             }
@@ -80,10 +82,10 @@ public class Peminjaman{
 	}
 	
 	public int getSisaPinjam(){
-            return maxPinjam - pinjaman.size();
+            return maxPinjam - listBuku.size();
 	}
 	
-	public double  getDenda(){
+	public double getDenda(){
             return denda;
 	}
 	
@@ -106,13 +108,19 @@ public class Peminjaman{
 	public void setIdPeminjaman(String IdPeminjaman){
             this.idPeminjaman = IdPeminjaman;
 	}
+        
+        public void setDenda(double denda){
+            this.denda = denda;
+        }
 
         public int getMaxPinjam() {
             return maxPinjam;
         }
         
-        public void hitungDenda(){
+        public void hitungDenda(long nominal){
             //Reserved buat hitung denda
+//            simpan ke
+//            this.setDenda(denda);
         }
         
 }

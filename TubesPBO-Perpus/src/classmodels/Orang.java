@@ -17,12 +17,6 @@ public abstract class Orang {
         this.nama = nama;
     }
 
-    public Orang(String nama, String idIdentitas) {
-        this.nama = nama;
-        this.idIdentitas = idIdentitas;
-    }
-
-
     public String getNama() {
         return nama;
     }

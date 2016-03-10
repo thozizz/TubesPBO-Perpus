@@ -4,6 +4,7 @@ package classmodels;
  *
  * @author ASYNC
  */
+
 public class Buku {
     private String idBuku;
     private String ISBN;
@@ -19,12 +20,11 @@ public class Buku {
         this.judul = judul;
     }
     
-    public Buku(String idBuku, String judul, String Penulis) {
+    public Buku(String idBuku, String judul, String penulis) {
         this.idBuku = idBuku;
         this.judul = judul;
         this.penulis = penulis;
     }
-    
     
     public String getIdBuku() {
         return idBuku;
@@ -89,4 +89,5 @@ public class Buku {
     public void tambahSiSaBuku(){
         sisaBuku++;
     }
+    
 }

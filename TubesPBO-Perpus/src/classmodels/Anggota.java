@@ -1,10 +1,8 @@
 package classmodels;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,34 +14,39 @@ public class Anggota extends Orang {
     private String tanggalPendaftaran;
     
     // CONSTRUCTOR
-    public Anggota( String idAnggota, String name){
+    public Anggota(String idAnggota, String name){
         super(name);
         this.idAnggota = idAnggota;
     }
     
     // METHOD
     public void createPinjaman(Date tanggal, String idPinjam, int maxPinjam){
-        Peminjaman pjm = null;
-        try {
-            pjm = new Peminjaman(idPinjam, tanggal, maxPinjam);
-        } catch (ParseException ex) {
-            Logger.getLogger(Anggota.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Peminjaman pjm;
+        //Object created di dalam method (komposisi)
+        pjm = new Peminjaman(idPinjam, tanggal, maxPinjam);
         riwayatPeminjaman.add(pjm);
     }
     
-    public void pengembalianPinjaman(String id, Date tanggal){
+    public void pengembalianPinjaman(String id, Date tanggalPengembalian){
         for(Peminjaman pjm : riwayatPeminjaman){
-                if(pjm.getIdPeminjaman() == id)
-                    pjm.setTanggalPengembalian(tanggal);
+                if(pjm.getIdPeminjaman().equals(id)){
+                    pjm.setTanggalPengembalian(tanggalPengembalian);
                     pjm.setStatusPeminjaman(false);
+                    // Disini ditambah logic hitung denda
+                    //if tanggalPemngebalian.after(pjm.getTanggalKembli())
+                    //kalo gak salah methodnya after
+                    //pjm.hitungDenda()
+                }
             }
-        // status peminjaman flase;z
     }
     
-    public Peminjaman getPinjaman(int id) {
-        return riwayatPeminjaman.get(id);
+    public Peminjaman getPinjamanByIndex(int idx) {
+        return riwayatPeminjaman.get(idx);
     }
+    
+//    public Peminjaman getPinjamanById(int id){
+//        //Logic Here;
+//    }
     
     public String getTanggalPendaftaran(){
         return tanggalPendaftaran;
@@ -52,4 +55,5 @@ public class Anggota extends Orang {
     public String idAnggota(){
         return idAnggota;
     }
+    
 }

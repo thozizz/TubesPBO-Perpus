@@ -27,17 +27,17 @@ public class Anggota extends Orang {
         riwayatPeminjaman.add(pjm);
     }
     
-    public void pengembalianPinjaman(String id, Date tanggalPengembalian){
+    public void pengembalianPinjaman(String idPinjaman, Date tanggalPengembalian){
         for(Peminjaman pjm : riwayatPeminjaman){
-                if(pjm.getIdPeminjaman().equals(id)){
-                    pjm.setTanggalPengembalian(tanggalPengembalian);
-                    pjm.setStatusPeminjaman(false);
-                    // Disini ditambah logic hitung denda
-                    //if tanggalPemngebalian.after(pjm.getTanggalKembli())
-                    //kalo gak salah methodnya after
-                    //pjm.hitungDenda()
-                }
+            if(pjm.getIdPeminjaman().equals(idPinjaman)){
+                pjm.setTanggalPengembalian(tanggalPengembalian);
+                pjm.setStatusPeminjaman(false);
+                // Disini ditambah logic hitung denda
+                //if tanggalPemngebalian.after(pjm.getTanggalKembli())
+                //kalo gak salah methodnya after
+                //pjm.hitungDenda()
             }
+        }
     }
     
     public Peminjaman getPinjamanByIndex(int idx) {

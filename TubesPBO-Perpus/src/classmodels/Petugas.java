@@ -24,6 +24,10 @@ public class Petugas extends Orang{
         a.createPinjaman(now, idPinjaman, maxPinjaman);
     }
     
+    public void removePinjamanAnggota(Anggota a, String idPinjaman, Date tanggalPengembalian){
+        a.pengembalianPinjaman(idPinjaman, tanggalPengembalian);
+    }
+    
     public void changeStatusPinjaman(Peminjaman pjm, boolean status){
         pjm.setStatusPeminjaman(status);
     }

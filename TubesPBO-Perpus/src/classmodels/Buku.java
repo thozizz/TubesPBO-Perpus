@@ -3,6 +3,8 @@ package classmodels;
 /**
  *
  * @author ASYNC
+ * name : ThoriqAbdulAziz
+ * Keterangan : OKE!! + TESTED!!
  */
 
 public class Buku {
@@ -15,22 +17,26 @@ public class Buku {
     private int sisaBuku;
     
 
-    public Buku(String idBuku, String judul) {
+    public Buku(String idBuku, String judul, int stockBuku) {
         this.idBuku = idBuku;
         this.judul = judul;
+        this.stockBuku = stockBuku;
+        this.sisaBuku = stockBuku;
     }
     
-    public Buku(String idBuku, String judul, String penulis) {
+    public Buku(String idBuku, String judul, int stockBuku, String penulis) {
         this.idBuku = idBuku;
         this.judul = judul;
+        this.stockBuku = stockBuku;
         this.penulis = penulis;
+        this.sisaBuku = stockBuku;
     }
     
-    public String getIdBuku() {
+    public String getId() {
         return idBuku;
     }
 
-    public void setIdBuku(String idBuku) {
+    public void setId(String idBuku) {
         this.idBuku = idBuku;
     }
 
@@ -88,6 +94,13 @@ public class Buku {
     
     public void tambahSiSaBuku(){
         sisaBuku++;
+    }
+    
+    public boolean dapatDipinjam(){
+        if(sisaBuku > 0)
+            return true;
+        else
+            return false;
     }
     
 }

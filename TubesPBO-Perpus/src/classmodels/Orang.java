@@ -1,7 +1,8 @@
 package classmodels;
 
 /*
- * @author TOriq, NIm,
+ * @author ThoriqAbdulAzizz
+ * Keterangan : OKE!! + TESTED!!
  */
 
 public abstract class Orang {
@@ -15,6 +16,11 @@ public abstract class Orang {
 
     public Orang(String nama) {
         this.nama = nama;
+    }
+    
+    public Orang(String nama, String idIdentitas) {
+        this.nama = nama;
+        this.idIdentitas = idIdentitas;
     }
 
     public String getNama() {

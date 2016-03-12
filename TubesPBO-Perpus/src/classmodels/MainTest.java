@@ -3,7 +3,7 @@ package classmodels;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
+
 
 /**
  *
@@ -11,53 +11,104 @@ import java.util.HashSet;
  */
 public class MainTest {
     
-
     public static void main(String[] args) throws ParseException {
         
+        //Format Date
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = null;
         
         // CLASS [BUKU] TESTING CASE
-        // Instantiate Object Buku
-        Buku buku1 = new Buku("IDB1", "Antara Aku dan Dia");
-        Buku buku2 = new Buku("IDB2", "Kekasihku yang telah tiada", 
-                "Budi Rahardjo");
-        
-        buku1.setSisaBuku(10);
-        
+        // Create Object Buku
+        Buku buku1 = new Buku("BK1", "Antara Aku dan Dia", 4);
+        Buku buku2 = new Buku("BK2", "Kekasihku yang telah tiada", 10, "Budi Rahardjo");
+                
         // CLASS [ANGGOTA] TESTING CASE
-        // Instantiate Object Anggota
-        Anggota anggota1 = new Anggota("IDA1", "Andrew Darwis");
+        // Create Object Anggota
+        Anggota anggota1 = new Anggota("AGT1", "Andrew Darwis");
         int maxPinjam;
         
-        // Anggota Create Pinjaman 
+        // CLASS [PEMINJAMAN] TESTING CASE
+        // Parsing date Tanggal Pinjam
         try {
            date = dateFormat.parse("02-02-2016");
         } catch (Exception e) {
            System.out.println("error at parsing");
         }
         
-        anggota1.createPinjaman(date, "IDP1", 5);
-        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
+        // Create Object Pinjaman in Anggota Object (Composition)
+        anggota1.createPeminjaman(date, "PJM1", 5);        
         
+        // CLASS [PETUGAS] TESTING CASE
+        // Create Object Petugas
+        Petugas petugas = new Petugas("PTG1", "Bambang");
+        
+        // Penambahan Pinjaman via Object Petugas
+        petugas.addPinjamanAnggota(anggota1, "PJM2", 5);
+        
+        // Penambahan Barang Buku pada Peminjaman Anggota 1 
+        petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM2"), buku2); 
+        petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM1"), buku2);        
+        petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM1"), buku1);
+        
+        // Parsing date tanggal pengembalian
         try {
            date = dateFormat.parse("10-02-2016");
         } catch (Exception e) {
            System.out.println("error at parsing");
         }
         
+        // Pengembalian Pinjaman suatu Anggota oleh Petugas 
+        petugas.pengembalianPinjamanAnggota(anggota1, "PJM1" , date);
+
+        System.out.println("Data Peminjaman Anggota 1 : ");
+        System.out.println("Nama : " + anggota1.getNama());
+        System.out.println("Riwayat Peminjaman : ");
         
-        anggota1.pengembalianPinjaman("IDP1", date);
+        for (int i = 0; i < anggota1.totalPeminjaman(); i++) {
+            System.out.println("\tID Peminjaman : " + anggota1.getPeminjamanByIndex(i).getId());
+            System.out.println("\tTanngal Peminjaman : " + anggota1.getPeminjamanByIndex(i).getTanggalPinjam());
+            System.out.println("\tTanngal Kembali : " + anggota1.getPeminjamanByIndex(i).getTanggalKembali());
+            System.out.println("\tTanngal Pengambalian : " + anggota1.getPeminjamanByIndex(i).getTanggalPengembalian());
+            System.out.println("\tStatus Peminjaman : " + anggota1.getPeminjamanByIndex(i).getStatus());
+            System.out.println("\tBiaya Denda : " + String.valueOf(anggota1.getPeminjamanByIndex(i).getBiayaDenda()));
+            System.out.println("\tList Buku : ");
+            for (int j = 0; j < anggota1.getPeminjamanByIndex(i).totalbuku(); j++) {
+                System.out.println("\t\tID Buku : " + anggota1.getPeminjamanByIndex(i).getBukuByIndex(j).getId() + 
+                        ", Judul Buku : " + anggota1.getPeminjamanByIndex(i).getBukuByIndex(j).getJudul()
+                        );
+            }
+            System.out.println();
+        }
         
-        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
-       
-        System.out.println(buku1.getSisaBuku());
+        //Output Object Data Buku
+        System.out.println("\nList Data Buku : ");
+        System.out.println("\tID : " + buku1.getId() +
+                "\n\tJudul : " + buku1.getJudul() +
+                "\n\tTotal Stock : " + buku1.getStockBuku() +
+                "\n\tSisa Stock : " + buku1.getSisaBuku()+
+                "\n\tDapat Dipinjam : " + buku1.dapatDipinjam()
+                );
         
-        anggota1.getPinjamanByIndex(0).addBuku(buku1);
+        System.out.println("\n\tID : " + buku2.getId() +
+                "\n\tJudul : " + buku2.getJudul() +
+                "\n\tTotal Stock : " + buku2.getStockBuku() +
+                "\n\tSisa Stock : " + buku2.getSisaBuku()+
+                "\n\tDapat Dipinjam : " + buku2.dapatDipinjam()
+                );
         
-        System.out.println(buku1.getSisaBuku());
+        System.out.println("\nData Petugas: ");
+        System.out.println("\tID : " + petugas.getId() + 
+                "\n\tNama : " + petugas.getNama()
+                );
         
-        HashSet hs = new HashSet();
+//        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
+//       
+//        System.out.println(buku1.getSisaBuku());
+//        
+//        anggota1.getPinjamanByIndex(0).addBuku(buku1);
+//        
+//        System.out.println(buku1.getSisaBuku());
+        
     }
     
 }

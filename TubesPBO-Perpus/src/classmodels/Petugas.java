@@ -1,6 +1,6 @@
 /*
  * Class Petugas
- * 
+ * Ket : Tested!!!!!!! 
  */
 package classmodels;
 
@@ -21,11 +21,11 @@ public class Petugas extends Orang{
     
     public void addPinjamanAnggota(Anggota a, String idPinjaman, int maxPinjaman){
         Date now = new Date();
-        a.createPinjaman(now, idPinjaman, maxPinjaman);
+        a.createPeminjaman(now, idPinjaman, maxPinjaman);
     }
     
-    public void removePinjamanAnggota(Anggota a, String idPinjaman, Date tanggalPengembalian){
-        a.pengembalianPinjaman(idPinjaman, tanggalPengembalian);
+    public void pengembalianPinjamanAnggota(Anggota a, String idPinjaman, Date tanggalPengembalian){
+        a.pengembalianPeminjaman(idPinjaman, tanggalPengembalian);
     }
     
     public void changeStatusPinjaman(Peminjaman pjm, boolean status){
@@ -36,13 +36,17 @@ public class Petugas extends Orang{
         pjm.addBuku(buku);
     }
     
-    public void removeBarangPinjaman(Peminjaman pjm, String idBuku, String judul){
-        Buku b = new Buku(idBuku, judul);
-        pjm.removeBuku(b); //Method ini belum ditulis di dalam ClassDiagram
+    public void removeBarangPinjaman(Peminjaman pjm, String idBuku){
+        Buku buku = pjm.getBukuById(idBuku);
+        pjm.removeBukuByObject(buku); //Method ini belum ditulis di dalam ClassDiagram
     }
     
     public boolean cekStatusPinjaman(Peminjaman pjm){
         return pjm.getStatus();
+    }
+    
+    public String getId(){
+        return idPetugas;
     }
     
 }

@@ -49,10 +49,19 @@ public class MainTest {
         petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM2"), buku2); 
         petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM1"), buku2);        
         petugas.addBarangPinjaman(anggota1.getPeminjamanById("PJM1"), buku1);
+        // Parsing date tanggal kembali
+        try {
+           date = dateFormat.parse("15-03-2016");
+        } catch (Exception e) {
+           System.out.println("error at parsing");
+        }
+        
+        // kembalian Pinjaman suatu Anggota oleh Petugas 
+        petugas.kembaliPinjamanAnggota(anggota1, "PJM1" , date);
         
         // Parsing date tanggal pengembalian
         try {
-           date = dateFormat.parse("10-02-2016");
+           date = dateFormat.parse("20-03-2016");
         } catch (Exception e) {
            System.out.println("error at parsing");
         }
@@ -101,13 +110,13 @@ public class MainTest {
                 "\n\tNama : " + petugas.getNama()
                 );
         
-//        System.out.println("Status Sebelum : " + anggota1.getPinjamanByIndex(0).getStatus());
-//       
-//        System.out.println(buku1.getSisaBuku());
-//        
-//        anggota1.getPinjamanByIndex(0).addBuku(buku1);
-//        
-//        System.out.println(buku1.getSisaBuku());
+        System.out.println("Status Sebelum : " + anggota1.getPeminjamanByIndex(0).getStatus());
+
+        System.out.println(buku1.getSisaBuku());
+        
+        anggota1.getPeminjamanByIndex(0).addBuku(buku1);
+        
+        System.out.println(buku1.getSisaBuku());
         
     }
     

@@ -24,6 +24,11 @@ public class Petugas extends Orang{
         a.createPeminjaman(now, idPinjaman, maxPinjaman);
     }
     
+    //new
+    public void kembaliPinjamanAnggota(Anggota a, String idPinjaman, Date tanggalkembali){
+        a.kembaliPeminjaman(idPinjaman, tanggalkembali);
+    }
+    
     public void pengembalianPinjamanAnggota(Anggota a, String idPinjaman, Date tanggalPengembalian){
         a.pengembalianPeminjaman(idPinjaman, tanggalPengembalian);
     }

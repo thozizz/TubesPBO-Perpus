@@ -142,8 +142,13 @@ public class Peminjaman{
 
     public void hitungDenda(long nominal){
         //Reserved buat hitung biayaDenda
-//            simpan ke
-//            this.setDenda(biayaDenda);
+        if(tanggalPengembalian.after(tanggalKembali)) {
+            double BiayaDenda;
+            BiayaDenda = ((tanggalPengembalian.getTime()-tanggalKembali.getTime())*nominal);
+            this.setBiayaDenda(biayaDenda);
+        } else {
+            this.setBiayaDenda(0);
+        }
     }
     
     public int totalbuku(){

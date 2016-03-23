@@ -35,7 +35,12 @@ public class Anggota extends Orang {
         //Insert it to array list
         riwayatPeminjaman.add(pjm);
     }
-    
+    //new 
+    public void kembaliPeminjaman(String idPinjaman, Date tanggalKembali){
+        for(Peminjaman pjm : riwayatPeminjaman){
+            if(pjm.getId().equals(idPinjaman)){
+                pjm.setTanggalPengembalian(tanggalKembali);}}
+    }
     public void pengembalianPeminjaman(String idPinjaman, Date tanggalPengembalian){
         for(Peminjaman pjm : riwayatPeminjaman){
             if(pjm.getId().equals(idPinjaman)){
@@ -47,10 +52,8 @@ public class Anggota extends Orang {
                     pjm.getBukuByIndex(i).tambahSiSaBuku();
                 }
                 
-                // Disini ditambah logic hitung denda
-                //if tanggalPemngebalian.after(pjm.getTanggalKembli())
-                //kalo gak salah methodnya after
-                //pjm.hitungDenda()
+                pjm.hitungDenda(3000);
+                System.out.println("Denda : "+pjm.getBiayaDenda());
             }
         }
     }

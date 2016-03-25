@@ -90,4 +90,16 @@ public class Anggota extends Orang {
         return riwayatPeminjaman.size();
     }
     
+    public void getAllPeminjaman(){
+        for(int i=0;i<riwayatPeminjaman.size();i++){
+            System.out.println("ID :"+riwayatPeminjaman.get(i).getId());
+            System.out.println("Tanggal Pinjam :"+riwayatPeminjaman.get(i).getTanggalPinjam());
+            System.out.println("Tanggal Kembali"+riwayatPeminjaman.get(i).getTanggalKembali());
+            if(riwayatPeminjaman.get(i).getTanggalPengembalian() != null){
+                System.out.println("Tanggal Pengembalian :"+riwayatPeminjaman.get(i).getTanggalPengembalian());
+            }
+            System.out.println();
+        }
+    }
+    
 }
